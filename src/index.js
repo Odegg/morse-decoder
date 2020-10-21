@@ -38,7 +38,14 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let Arr = [];
+    for (let i = 0; i < expr.length / 10; i++) {
+        Arr.push(parseInt(expr.substring(i * 10, i * 10 + 10), 10).toString().match(/.{1,2}/g))
+    }
+    return Arr.map(item => {
+        let Mass = item.map(item => item == '10' ? '.' : item == '11' ? '-' : '*').join('');
+        return Mass.includes('*') ? ' ' : MORSE_TABLE[Mass];
+    }).join('');
 }
 
 module.exports = {
